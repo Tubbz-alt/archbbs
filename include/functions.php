@@ -2056,7 +2056,7 @@ function url_valid($url)
 function ucp_preg_replace($pattern, $replace, $subject, $callback = false)
 {
 	if($callback)
-		$replaced = preg_replace_callback($pattern, create_function('$matches', 'return '.$replace.';'), $subject);
+		$replaced = preg_replace_callback($pattern, function($matches) use ($replace) {return $replace;}, $subject);
 	else
 		$replaced = preg_replace($pattern, $replace, $subject);
 
